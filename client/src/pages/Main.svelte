@@ -1,8 +1,9 @@
 <script lang="ts">
     import { onMount } from "svelte"
-    import Chat from "../lib/Chat.svelte"
     import type { Socket } from "socket.io-client"
     import { makeSocket } from "../lib/ip"
+    import Chat from "../lib/Chat.svelte"
+    import copy from "copy-to-clipboard"
 
     let texts: string[] = []
     let socket: Socket
@@ -11,9 +12,7 @@
         socket = makeSocket()
 
         socket.on("@copy", async (text: string) => {
-            try {
-                await navigator.clipboard.writeText(text)
-            } catch {}
+            copy(text)
             texts = [...texts, text]
         })
     })
