@@ -10,7 +10,10 @@
     onMount(() => {
         socket = makeSocket()
 
-        socket.on("@copy", (text: string) => {
+        socket.on("@copy", async (text: string) => {
+            try {
+                await navigator.clipboard.writeText(text)
+            } catch {}
             texts = [...texts, text]
         })
     })
