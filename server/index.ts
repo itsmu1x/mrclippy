@@ -12,8 +12,8 @@ const io = new Server(httpServer as any, {
 
 io.on("connection", (socket) => {
     socket.on("@copy", (text: string) => {
+        // console.log("@copy", text)
         io.emit("@copy", text)
-        console.log("@copy", text)
     })
 })
 

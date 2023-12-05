@@ -10,7 +10,7 @@
     $: {
         if (currentText) {
             socket.emit("@copy", currentText)
-            texts = [...texts, currentText]
+            texts = [currentText, ...texts]
         }
     }
 

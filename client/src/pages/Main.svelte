@@ -3,7 +3,6 @@
     import type { Socket } from "socket.io-client"
     import { makeSocket } from "../lib/ip"
     import Chat from "../lib/Chat.svelte"
-    import copy from "copy-to-clipboard"
 
     let texts: string[] = []
     let socket: Socket
@@ -12,8 +11,7 @@
         socket = makeSocket()
 
         socket.on("@copy", async (text: string) => {
-            copy(text)
-            texts = [...texts, text]
+            texts = [text, ...texts]
         })
     })
 </script>
