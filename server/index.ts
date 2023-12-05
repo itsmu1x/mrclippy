@@ -1,7 +1,7 @@
 import { createServer } from "http"
 import { Server } from "socket.io"
 import os from "os"
-import { generate } from "qrcode-terminal"
+import qrcode from "qrcode-terminal"
 
 const httpServer = createServer()
 const io = new Server(httpServer as any, {
@@ -18,7 +18,7 @@ io.on("connection", (socket) => {
 })
 
 httpServer.listen(5000, localIP(), () => {
-    generate(`http://${localIP()}:5173/`)
+    qrcode.generate(`http://${localIP()}:5173/`, { small: true })
 })
 
 function localIP() {
