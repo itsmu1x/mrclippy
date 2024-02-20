@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { Socket } from "socket.io-client"
     import { onMount } from "svelte"
-    import { makeSocket } from "../lib/ip"
+    import { makeSocket } from "../lib/socket"
     import Copied from "../lib/Copied.svelte"
 
     let socket: Socket
@@ -10,11 +10,13 @@
     $: {
         if (currentText) {
             socket.emit("@copy", currentText)
-            texts = [currentText, ...texts]
+            texts = [currentText, ...texts].splice(0, 10)
         }
     }
 
     async function readText() {
+        if (!document.hasFocus()) return undefined
+
         try {
             return await navigator.clipboard.readText()
         } catch {

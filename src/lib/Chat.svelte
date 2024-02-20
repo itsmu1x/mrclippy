@@ -1,8 +1,7 @@
 <script lang="ts">
     import ClipboardJS from "clipboard"
 
-    export let text: string =
-        "sasiodhsa d0sa90h 9d0sah90 hd9as0 dh0sa0 dhsa90h90d"
+    export let text: string
 
     function clipboard(node: HTMLElement) {
         new ClipboardJS(node)

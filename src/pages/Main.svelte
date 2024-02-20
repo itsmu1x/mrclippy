@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onMount } from "svelte"
     import type { Socket } from "socket.io-client"
-    import { makeSocket } from "../lib/ip"
+    import { makeSocket } from "../lib/socket"
     import Chat from "../lib/Chat.svelte"
 
     let texts: string[] = []
@@ -9,9 +9,9 @@
 
     onMount(() => {
         socket = makeSocket()
-
-        socket.on("@copy", async (text: string) => {
-            texts = [text, ...texts]
+        socket.off("@copy")
+        socket.on("@copy", (text: string) => {
+            texts = [text, ...texts].splice(0, 10) // last 10
         })
     })
 </script>
